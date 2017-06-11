@@ -167,7 +167,7 @@ function createNewPost(){
     });
 
     closeCreatePostMenu();
-    addNewPostToDOM();
+    addNewPostToDOM( newPostObject );
 
   }
   else{
@@ -203,10 +203,11 @@ function createNewComment(){
           console.log("Success adding comment.");
         }
       });
-    }
 
-    closeCreateCommentMenu();
-    addNewCommentToDOM();
+      closeCreateCommentMenu();
+      addNewCommentToDOM( newCommentObject );
+
+    }
 
   }
   else{
@@ -272,21 +273,27 @@ function getTimestamp(){
   var time = new Date();
 
   var year = time.getFullYear();
+  console.log( year );
 
   var month = time.getMonth()+1;
-  month = ( month < 10 ? "0" : "" );
+  month = ( month < 10 ? "0" : "" ) + month;
+  console.log( month );
 
   var day = time.getDate();
-  day = ( day < 10 ? "0" : "" );
+  day = ( day < 10 ? "0" : "" ) + day;
+  console.log( day );
 
   var hour = time.getHours();
   hour = ( hour < 10 ? "0" : "" ) + hour;
+  console.log( hour );
 
   var min = time.getMinutes();
   min = ( min < 10 ? "0" : "" ) + min;
+  console.log( min );
 
   var sec = time.getSeconds();
-  sec = ( sec < 10 ? "0" : "" );
+  sec = ( sec < 10 ? "0" : "" ) + sec;
+  console.log( sec );
 
   return year + ":" + month + ":" + day + ":" + hour + ":" + min + ":" + sec;
 
@@ -296,14 +303,28 @@ function getTimestamp(){
 /*******************************************
  *
  *******************************************/
-function addNewPostToDOM(){
-
+function addNewPostToDOM( postToAdd ){
+  var postTemplate = Handlebars.templates.postTemplate;
+  var newPostObject = {
+    postid: postToAdd.postid,
+    title: postToAdd.title,
+    timestamp: postToAdd.timestamp,
+    animalUrl: "#",
+    postedBy: "user.",
+    postContent: postToAdd.postContent
+  }
+  var newPost = postTemplate( newPostObject );
+  var postContainer = document.querySelector( "post-container" );
+  postContainer.insertAdjacentHTML( newPost );
 }
 
 
 /*******************************************
  *
  *******************************************/
- function addNewCommentToDOM(){
-
+ function addNewCommentToDOM( commentToAdd ){
+   var commentTemplate = Handlebars.templates.commentTemplate;
+   var newComment = commentTemplate( commentToAdd );
+   var commentContainer = document.querySelector( "comment-container" );
+   commentContainer.insertAdjacentHTML( newComment );
  }

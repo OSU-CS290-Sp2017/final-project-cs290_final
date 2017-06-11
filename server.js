@@ -1,6 +1,7 @@
 var fs = require( 'fs' );
 var path = require( 'path' );
 var express = require( 'express' );
+var handlebars = require( 'handlebars' );
 var expressHandlebars = require( 'express-handlebars' );
 var bodyParser = require( 'body-parser' );
 var MongoClient = require( 'mongodb' ).MongoClient;
