@@ -1,0 +1,17 @@
+db.animals.insert([
+  {num:0,url:"https://en.Wikipedia.org/wiki/Chinese_giant_salamander",name:"Chinese Giant Salamander"},
+  {num:1,url:"https://en.Wikipedia.org/wiki/Saiga_antelope",name:"Saiga Antelope"},
+  {num:2,url:"https://en.Wikipedia.org/wiki/Western_lowland_gorilla",name:"Western Lowland Gorilla"},
+  {num:3,url:"https://en.Wikipedia.org/wiki/Scimitar_oryx",name:"Scimitar Oryx"},
+  {num:4,url:"https://en.Wikipedia.org/wiki/Axolotl",name:"Axolotl"},
+  {num:5,url:"https://en.Wikipedia.org/wiki/Kakapo",name:"Kakapo"},
+  {num:6,url:"https://en.Wikipedia.org/wiki/Sumatran_elephant",name:"Sumatran_Elephant"},
+  {num:7,url:"https://en.Wikipedia.org/wiki/Hawksbill_sea_turtle",name:"Hawksbill Sea Turtle"},
+  {num:8,url:"https://en.Wikipedia.org/wiki/Tasmanian_devil",name:"Tasmanian Devil"},
+  {num:9,url:"https://en.Wikipedia.org/wiki/Markhor",name:"Markhor"},
+  {num:10,url:"https://en.Wikipedia.org/wiki/Dhole",name:"Dhole"},
+  {num:11,url:"https://en.Wikipedia.org/wiki/Ethiopian_wolf",name:"Ethiopan Wolf"},
+  {num:12,url:"https://en.Wikipedia.org/wiki/Addax",name:"Addax"},
+  {num:13,url:"https://en.Wikipedia.org/wiki/California_condor",name:"California Condor"},
+  {num:14,url:"https://en.Wikipedia.org/wiki/Hawaiian_monk_seal",name:"Hawai'ian Monk Seal"},
+])

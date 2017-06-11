@@ -1,0 +1,9 @@
+node_modules
+node_modules/*
+dbstartup.bat
+enterCMD.bat
+package-lock.json
+public/commentTemplate.js
+public/postTemplate.js
+database
+database/*
