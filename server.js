@@ -21,6 +21,7 @@ var port = process.env.PORT || 3000;
 
 app.engine( 'handlebars', expressHandlebars({ defaultLayout: 'main' }));
 app.use( bodyParser.json() );
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set( 'view engine', 'handlebars' );
 
 
@@ -45,26 +46,38 @@ app.get( '/', function( req, res, next ){
 
 
 /*******************************************
- *
+ * Serves a set of post links that match the
+ * query data passed to the address.
+ * FIXME: can only process exact matches.
+ *        I couldn't make the regex work
  *******************************************/
-app.get( '/posts/searchresults', function( res, req, next ){
+app.get( '/searchresults', function( req, res, next ){
 
-  if( req.body.searchQuery ){
+  var searchReq = req.query.search;
 
-    var collection = mongodb.collection( 'posts' );
+  if( searchReq !== '' ){
 
-    collection.find( {$or: [{title: /.*req.body.searchQuery.*/}, {postContent: /.*req.body.searchQuery.*/}] } ).toArray( function( err, postSet ){
+    console.log(searchReq);
+
+    var collection = mongodb.collection('posts');
+
+//  This line works perfectly from the mongo shell, but I can't figure out how to make it work from here.
+//  collection.find( {$or:[ {title:{$regex:"/.*"+searchReq+".*/"}}, {postContent:{$regex:"/.*"+searchReq+".*/"}} ]} ).toArray( function( err, postSet ){
+//  So instead, I use the version which only finds perfect matches
+    collection.find( {$or:[ {title:searchReq},{postContent:searchReq} ]} ).toArray( function( err, postSet ){
       if(err){
         res.status( 500 ).send( "Error getting posts." );
       }
       else{
         var tempArgs = {posts: postSet};
+        console.log( tempArgs );
         res.status( 200 ).render( 'boardPage', tempArgs );
       }
     });
 
   }
   else{
+    console.log("search failed");
     next();
   }
 
@@ -72,7 +85,10 @@ app.get( '/posts/searchresults', function( res, req, next ){
 
 
 /*******************************************
- *
+ * Serves a random thread using aggregate
+ * and $sample to fetch a random document
+ * then redirects using a 302 to that
+ * document's page
  *******************************************/
 app.get( '/posts/random', function( req, res, next ){
 
@@ -88,25 +104,8 @@ app.get( '/posts/random', function( req, res, next ){
       next();
     }
     else{
-
       res.writeHead(302,{location:"/posts/"+postSet[0].postid});
       res.end();
-
-      // var postThis = [postSet[0]];
-      // var postid = postSet[0].postid;
-      // console.log( postid );
-      // console.log( "Matching random post found." );
-      // collectionCom.find({postid:postid}).toArray( function( err, commentSet ){
-      //   if(err){
-      //     res.status( 500 ).send( "Error getting comments." );
-      //   }
-      //   else{
-      //     var tempArgs = {
-      //       comments: commentSet,
-      //       posts: postThis};
-      //     res.status( 200 ).render( 'postPage', tempArgs );
-      //   }
-      // });
     }
   });
 
@@ -114,7 +113,9 @@ app.get( '/posts/random', function( req, res, next ){
 
 
 /*******************************************
- *
+ * Serves the post which matches the passed
+ * postid, then serves and attaches the
+ * related comments
  *******************************************/
 app.get( '/posts/:postid', function( req, res, next ){
 
@@ -151,7 +152,9 @@ app.get( '/posts/:postid', function( req, res, next ){
 
 
 /*******************************************
- *
+ * POST request which creates a new post,
+ * including fetching a random animal from
+ * the animal database
  *******************************************/
 app.post('/posts/createNewPost', function( req, res, next){
 
@@ -205,7 +208,9 @@ app.post('/posts/createNewPost', function( req, res, next){
 
 
 /*******************************************
- *
+ * POST request which creates a new comment,
+ * including fetching a random animal from
+ * the animal database
  *******************************************/
 app.post( '/posts/:postid/createNewComment', function( req, res, next ){
 
@@ -257,13 +262,13 @@ app.post( '/posts/:postid/createNewComment', function( req, res, next ){
 
 
 /*******************************************
- *
+ * Statically serves files from /public
  *******************************************/
 app.use( express.static( path.join( __dirname, 'public' ) ) );
 
 
 /*******************************************
- *
+ * Serves 404 page
  *******************************************/
 app.get( '*', function( req, res, next ){
   res.status( 404 ).render( '404page' );
@@ -271,7 +276,8 @@ app.get( '*', function( req, res, next ){
 
 
 /*******************************************
- *
+ * Connects to the database and starts the
+ * server running on the specified port
  *******************************************/
 MongoClient.connect( url, function( err, db ){
   if( err ){

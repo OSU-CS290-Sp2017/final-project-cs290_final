@@ -21,6 +21,11 @@ else{
  *******************************************/
 function initListeners(){
 
+  var searchPostsField = document.getElementById( 'search-posts' );
+  if(searchPostsField){searchPostsField.addEventListener( 'keypress',function(key){
+    if(key.which===13){ getSearchResults(); }
+  });}
+
   var searchPostsButton = document.getElementById( 'search-posts-button' );
   if(searchPostsButton){searchPostsButton.addEventListener( 'click', getSearchResults );}
 
@@ -149,26 +154,13 @@ function getThemeCookie(){
  *******************************************/
 function getSearchResults(){
 
-  var searchQuery = document.getElementById( 'search-posts' ).value.trim();
-  console.log(searchQuery);
+  var query = document.getElementById( 'search-posts' ).value.trim();
 
-  if( searchQuery !== '' ){
-    var searchReq = new XMLHttpRequest;
-    var searchReqUrl = '/posts/searchresults';
-
-    searchReq.open( 'GET', searchReqUrl );
-    searchReq.setRequestHeader( 'Content-Type', 'text/html' );
-
-    postReq.addEventListener( 'load', function(event){
-      var error;
-      if( event.target.status !== 200 ){
-        error = event.target.response;
-      }
-      callback( error );
-    });
-
-    postReq.send( searchQuery );
-
+  if( query !== '' ){
+    query = query.replace(" ","%20");
+    var searchReqUrl = '/searchresults?search=' + query;
+    console.log( searchReqUrl );
+    window.location.href = searchReqUrl;
   }
 
 }
@@ -275,6 +267,8 @@ function uploadPost( newPost, url, callback ){
     callback( error );
   });
 
+  console.log(newPost);
+  console.log(postReq);
   postReq.send( JSON.stringify(newPost) );
 
 }
@@ -286,7 +280,7 @@ function uploadPost( newPost, url, callback ){
  *******************************************/
 function createPostID( time, title ){
   var trimmedTitle = title.substring(0, 15);
-  var trimmedTime = time.substring(13,14) + time.substring(15,16);
+  var trimmedTime = time.substring(15,16) + time.substring(18,19);
   return trimmedTitle + trimmedTime;
 }
 
