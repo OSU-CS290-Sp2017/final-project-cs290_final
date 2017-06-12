@@ -1,0 +1,302 @@
+body{
+  margin: 0px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.lightTheme{
+  background-color: #dddddd;
+  color: #111111;
+}
+
+.darkTheme{
+  background-color: #333333;
+  color: #eeeeee;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+button{
+  outline: none;
+}
+.lightTheme button{
+  color: #111111;
+}
+.darkTheme button{
+  color: #eeeeee;
+}
+
+header{
+  height: 150px;
+  background-color: #449955;
+}
+
+.title{
+  font-family: "Josefin Sans", sans-serif;
+  color: #662200;
+  font-size: 30pt;
+  margin: 0;
+  padding: 15px;
+  padding-bottom: 0px;
+}
+.title.sub{
+  font-size: 14pt;
+}
+
+.full-wide {
+width: 100%;
+margin-left: 0;
+margin-right: 0;
+padding-left: 0;
+padding-right: 0;
+display: block;
+text-align: center;
+}
+
+/*============================== NAVBAR =================================*/
+
+.navbar{
+  margin-top: 11px;
+  background-color: #966e36;
+  height: 54px;
+}
+
+.navoptions{
+  margin: 0px;
+  list-style-type: none;
+}
+
+.navoption{
+  display: inline-block;
+}
+
+.navoption a{
+  display: inline-block;
+  padding: 11px;
+  margin-right: 25px;
+  font-size: 16pt;
+}
+
+.navoption a:hover{
+  padding-bottom: 6px;
+  border-bottom: 5px solid #449955;
+}
+
+.nav-search{
+  padding: 5px;
+  height: 45px;
+  float: right;
+}
+
+.search-input{
+  width: 250px;
+  height: 40px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  background-color: #eeeeee;
+  font-size: 14pt;
+  margin-top: 0px;
+}
+
+.search-input:hover,
+.search-input:focus{
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+}
+
+.search-reminder-text{
+  display: none;
+  position: absolute;
+  padding: 5px;
+  border-top: none;
+  border-radius: 3px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  background-color: #aaaaaa;
+  width: 242px;
+  font-size: 10pt;
+  z-index: 1;
+  margin-top: -2px;
+}
+
+.nav-search:hover .search-reminder-text{
+  display: block;
+}
+
+.navoptions button{
+  text-decoration: none;
+  display: inline-block;
+  background-color: inherit;
+  border: none;
+  padding: none;
+  font-size: 14pt;
+}
+
+/*======================== BODY - Board Page ===========================*/
+
+.title main{
+  font-size: 22pt;
+}
+
+main a:hover{
+  text-shadow: none;
+  border-bottom: 2px solid #449955;
+  text-decoration: none;
+}
+
+.main-container{
+  display: block;
+  margin: 25px 10%;
+}
+
+.post-link{
+  padding-left: 2%;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+.lightTheme .post-link{
+  background-color: #eeeeee;
+  border: 2px solid #aaaaaa;
+}
+.darkTheme .post-link{
+  background-color: #444444;
+  border: 2px solid #888888;
+}
+/*========================= MAIN - Post Page ===========================*/
+
+.post-container{
+  display: block;
+  border-radius: 5px;
+  padding: 5px;
+  padding-left: 5%;
+}
+.lightTheme .post-container{
+  background-color: #eeeeee;
+  border: 2px solid #aaaaaa;
+}
+.darkTheme .post-container{
+  background-color: #444444;
+  border: 2px solid #888888;
+}
+
+.comment-container{
+  display: block;
+  margin: 25px;
+  margin-left: 3%;
+}
+
+.comment{
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  margin-top: -2px;
+  padding: 5px;
+  padding-left: 3%;
+}
+.lightTheme .comment{
+  background-color: #dddddd;
+  border: 2px solid #aaaaaa;
+}
+.darkTheme .comment{
+  background-color: #333333;
+  border: 2px solid #999999;
+}
+
+.info-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.timestamp{
+  align-self: right;
+}
+
+.content-container{
+  padding-left: 10px;
+}
+.lightTheme .content-container{
+  border-left: 2px solid #aaaaaa;
+}
+.darkTheme .content-container{
+  border-left: 2px solid #999999;
+}
+
+.content{
+}
+
+/*===================== MAIN - Create Post =============================*/
+
+.create-button{
+  display: block;
+  background-color: #966e36;
+  border: none;
+  height: 45px;
+  font-size: 16pt;
+}
+
+.create-comment-menu{
+  padding: 2%;
+  padding-bottom: 12%;
+}
+.lightTheme .create-comment-menu{
+  background-color: #dddddd;
+  border: 2px solid #aaaaaa;
+}
+.darkTheme .create-comment-menu{
+  background-color: #333333;
+  border: 2px solid #999999;
+}
+
+.create label{
+  font-size: 14pt;
+}
+
+.create-input textarea{
+  background-color: #eeeeee;
+}
+.create-input textarea:focus{
+  background-color: #ffffff;
+}
+
+.create-input{
+  text-align: left;
+  font-size: 12pt;
+}
+.title-input{
+  height: 25px;
+}
+.content-input{
+  height: 200px;
+}
+
+.create-cancel{
+  float: left;
+  width: 45%;
+  margin: 2%;
+}
+.create-submit{
+  float: right;
+  width: 45%;
+  margin: 2%;
+}
+
+/*============================= FOOTER ==================================*/
+
+.theme-button{
+  background-color: #449955;
+  position: absolute;
+  right: 2%;
+  bottom: 2%;
+  height: 40px;
+  width: 80px;
+  border:none;
+  border-radius: 20px;
+  font-size: 12pt;
+}
+
+/*============================= CLOSED ==================================*/
+
+.closed{
+  display: none;
+}

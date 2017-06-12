@@ -19,6 +19,12 @@ else{
  *******************************************/
 function initListeners(){
 
+  // var searchBarInput = document.getElementById( 'search-posts' );
+  // if(searchBarInput){
+  //   searchBarInput.addEventListener( 'focus', openSearchText );
+  //   searchBarInput.addEventListener( 'blur', closeSearchText );
+  // }
+
   var searchPostsButton = document.getElementById( 'search-posts-button' );
   if(searchPostsButton){searchPostsButton.addEventListener( 'click', getSearchResults );}
 
@@ -45,6 +51,18 @@ function initListeners(){
 
 }
 
+
+//
+// function openSearchText(){
+//   var searchText = document.getElementById( 'search-reminder-text' );
+//   searchText.classList.remove( 'closed' );
+// }
+//
+// function closeSearchText(){
+//   var searchText = document.getElementById( 'search-reminder-text' );
+//   searchText.classList.add( 'closed' );
+// }
+//
 
 /*******************************************
  * Opens the menu to create a post

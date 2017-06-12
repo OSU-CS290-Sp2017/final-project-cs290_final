@@ -1,20 +1,24 @@
 {{> header}}
 
-<main class="post-container">
+<main class="main-container">
 
-  {{#each posts}}
-    {{> post}}
-  {{/each}}
+  <article class="post-container">
 
-  <div class="post-comments">
-    {{#each comments}}
-      {{> comment}}
+    {{#each posts}}
+      {{> post}}
     {{/each}}
-  </div>
 
-  <div class="post-newComment">
-    {{> createComment}}
-  </div>
+    <div class="comment-container">
+      {{#each comments}}
+        {{> comment}}
+      {{/each}}
+    </div>
+
+    <div class="post-newComment">
+      {{> createComment}}
+    </div>
+
+  </article>
 
 </main>
 
