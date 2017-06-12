@@ -1,6 +1,7 @@
 var fs = require( 'fs' );
 var path = require( 'path' );
 var express = require( 'express' );
+var handlebars = require( 'handlebars' );
 var expressHandlebars = require( 'express-handlebars' );
 var bodyParser = require( 'body-parser' );
 var MongoClient = require( 'mongodb' ).MongoClient;
@@ -19,9 +20,10 @@ console.log( 'mongo url', url );
 var app = express();
 var port = process.env.PORT || 3000;
 
-app.engine( 'handlebars', expressHandlebars({ defaultLayout: 'main' }));
+app.engine( 'handlebars', expressHandlebars({ defaultLayout: 'main' }) );
+
 app.use( bodyParser.json() );
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use( bodyParser.urlencoded({ extended: true }) );
 app.set( 'view engine', 'handlebars' );
 
 
@@ -37,6 +39,7 @@ app.get( '/', function( req, res, next ){
       res.status( 500 ).send( "Error getting posts" );
     }
     else{
+      postSet.reverse();
       var tempArgs = {posts: postSet};
       res.status( 200 ).render( 'boardPage', tempArgs );
     }
@@ -69,6 +72,7 @@ app.get( '/searchresults', function( req, res, next ){
         res.status( 500 ).send( "Error getting posts." );
       }
       else{
+        postSet.reverse();
         var tempArgs = {posts: postSet};
         console.log( tempArgs );
         res.status( 200 ).render( 'boardPage', tempArgs );

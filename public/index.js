@@ -338,7 +338,8 @@ function getTimestamp(){
  *
  *******************************************/
 function addNewPostToDOM( postToAdd ){
-  var postTemplate = Handlebars.templates.postTemplate;
+  var postTemplate = Handlebars.templates['postLink'];
+  console.log( postTemplate );
   var newPostObject = {
     postid: postToAdd.postid,
     title: postToAdd.title,
@@ -348,8 +349,8 @@ function addNewPostToDOM( postToAdd ){
     postContent: postToAdd.postContent
   }
   var newPost = postTemplate( newPostObject );
-  var postContainer = document.querySelector( "post-container" );
-  postContainer.insertAdjacentHTML( newPost );
+  var postContainer = document.getElementById( "main-container" );
+  postContainer.insertAdjacentHTML( 'afterbegin', newPost );
 }
 
 
@@ -357,8 +358,15 @@ function addNewPostToDOM( postToAdd ){
  *
  *******************************************/
  function addNewCommentToDOM( commentToAdd ){
-   var commentTemplate = Handlebars.templates.commentTemplate;
-   var newComment = commentTemplate( commentToAdd );
-   var commentContainer = document.querySelector( "comment-container" );
-   commentContainer.insertAdjacentHTML( newComment );
+   var commentTemplate = Handlebars.templates['comment'];
+   var newCommentObject = {
+     postid: commentToAdd.postid,
+     timestamp: commentToAdd.timestamp,
+     animalUrl: "#",
+     postedBy: "user.",
+     commentContent: commentToAdd.commentContent
+   }
+   var newComment = commentTemplate( newCommentObject );
+   var commentContainer = document.getElementById( "comment-container" );
+   commentContainer.insertAdjacentHTML( 'beforeend', newComment );
  }

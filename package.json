@@ -5,10 +5,10 @@
   "main": "server.js",
   "scripts": {
     "uninstall": "npm uninstall body-parser --save && npm uninstall express --save && npm uninstall express-handlebars --save && npm uninstall handlebars --save && npm uninstall mongodb --save",
-    "install": "npm install body-parser --save && npm install express --save && npm install express-handlebars --save && npm install handlebars@4.0.0 --save && npm install mongodb --save",
+    "install": "npm install body-parser --save && npm install express --save && npm install express-handlebars --save && npm install handlebars@4.0.10 --save && npm install mongodb --save",
     "reinstall": "npm run uninstall && npm run install",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "handlebars views/partials/post.handlebars -f public/postTemplate.js && handlebars views/partials/comment.handlebars -f public/commentTemplate.js",
+    "build": "handlebars public/ > public/templates.js",
     "prestart": "npm run build",
     "start": "node server.js"
   },
@@ -22,7 +22,7 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "express-handlebars": "^3.0.0",
-    "handlebars": "^4.0.0",
+    "handlebars": "^4.0.10",
     "mongodb": "^2.2.28"
   }
 }

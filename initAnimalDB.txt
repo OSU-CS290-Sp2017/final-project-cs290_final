@@ -15,3 +15,5 @@ db.animals.insert([
   {num:13,url:"https://en.Wikipedia.org/wiki/California_condor",name:"California Condor"},
   {num:14,url:"https://en.Wikipedia.org/wiki/Hawaiian_monk_seal",name:"Hawai'ian Monk Seal"},
 ])
+
+"build": "handlebars views/partials/post.handlebars -f public/templates.js && handlebars views/partials/comment.handlebars -f public/templates.js",
