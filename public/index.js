@@ -1,5 +1,6 @@
 /*******************************************
- *
+ * Checks if the document has loaded. If so,
+ * Hooks up the js functionality and checks themes
  *******************************************/
 if( document.readyState === 'complete' ){
   console.log( 'Document already loaded.' );
@@ -9,13 +10,14 @@ else{
   console.log( 'Added DOM content listener' );
   window.addEventListener( 'DOMContentLoaded', function(){
     console.log( 'DOM content listener fired.' );
+    getThemeCookie();
     initListeners();
   });
 }
 
 
 /*******************************************
- *
+ * Hooks up js functionality to elements
  *******************************************/
 function initListeners(){
 
@@ -66,7 +68,7 @@ function closeCreatePostMenu(){
 
 
 /*******************************************
- *
+ * Opens the menu to create a comment
  *******************************************/
 function openCreateCommentMenu(){
   var createCommentMenu = document.getElementById( 'create-comment-body' );
@@ -75,7 +77,7 @@ function openCreateCommentMenu(){
 
 
 /*******************************************
- *
+ * Closes the menu to create a comment
  *******************************************/
 function closeCreateCommentMenu(){
   var createCommentMenu = document.getElementById( 'create-comment-body' );
@@ -100,6 +102,11 @@ function clearInputs( typeOfInput ){
 }
 
 
+/*******************************************
+ * Swaps between the two themes by checking
+ * which is currently active, then swapping
+ * the classes and assigning the cookie
+ *******************************************/
 function switchThemes(){
   var entirePage = document.getElementById( 'document-body' );
   if( entirePage.classList.contains( 'lightTheme' ) ){
@@ -116,7 +123,29 @@ function switchThemes(){
 
 
 /*******************************************
- *
+ * Checks if the theme cookie exists, then,
+ * if the dark theme cookie exists, swaps
+ * themes to dark. If the dark theme cookie
+ * doesn't exist, then it just sets the cookie
+ * equal to light since that's the default
+ *******************************************/
+function getThemeCookie(){
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var cookieArray = decodedCookie.split(';');
+  cookieArray = cookieArray[0].split('=');
+  if( cookieArray[0] === "theme" && cookieArray[1] === "darkTheme" ){
+    console.log("Dark theme cookie found.");
+    switchThemes();
+  }
+  else{
+    console.log("Light theme cookie assigned.");
+    document.cookie = "theme=lightTheme;path=/";
+  }
+}
+
+
+/*******************************************
+ * Sends a GET request for the search field
  *******************************************/
 function getSearchResults(){
 
@@ -146,7 +175,8 @@ function getSearchResults(){
 
 
 /*******************************************
- *
+ * Builds the object for a new post based on
+ * data fields, then calls the POST function
  *******************************************/
 function createNewPost(){
 
@@ -186,7 +216,8 @@ function createNewPost(){
 
 
 /*******************************************
- *
+ * Creates the object for a new comment based
+ * on text fields, then calls the POST function
  *******************************************/
 function createNewComment(){
 
@@ -226,7 +257,8 @@ function createNewComment(){
 
 
 /*******************************************
- *
+ * Sends a POST request for either a post or
+ * comment based on the object and url passed
  *******************************************/
 function uploadPost( newPost, url, callback ){
   var postReqUrl = url;
@@ -260,7 +292,8 @@ function createPostID( time, title ){
 
 
 /*******************************************
- *
+ * Checks the postid for the current post to
+ * know which post to attach the comment to
  *******************************************/
 function getPostIDforComment(){
   var postUrlPath = window.location.pathname.split('/');
@@ -274,7 +307,6 @@ function getPostIDforComment(){
 /*******************************************
  * Creates a string for the current time in
  * the format YYYY:MM:DD:HH:MM:SS
- * FIXME
  *******************************************/
 function getTimestamp(){
 
